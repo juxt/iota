@@ -22,7 +22,7 @@ When you are writing tests, it's common to want to check a number of properties 
 
 This can get a bit cumbersome.
 
-iota is a little library that provides a single macro, `iota.iota/given`, that allows you to create triples, each of which expands into a `clojure.test/is` assertion.
+__iota__ is a little library that provides a single macro, `iota.iota/given`, that allows you to create triples, each of which expands into a `clojure.test/is` assertion.
 
 ```clojure
 (require '[clojure.test :refer :all]
