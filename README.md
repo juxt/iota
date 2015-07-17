@@ -42,22 +42,22 @@ It's a little less typing, which might give you the extra time to add more check
 
 ## Valid operators
 
-Operator     | Meaning
--------------|-------------------
-:=           | is equal to
-:!=          | isn't equal to
-:-           | conforms to schema
-:!-          | doesn't conform to schema
-:?           | passes predicate
-:!?          | fails predicate
-:#           | matches regex
-:!#          | doesn't match regex
-:> or :⊃     | is superset of
-:!> or :⊅    | isn't superset of
-:< or :⊂     | is subset of
-:!< or :⊄    | isn't subset of
-:instanceof  | is instance of
-:!instanceof | isn't instance of
+Operator       | Meaning
+---------------|-------------------
+`:=`           | is equal to
+`:!=`          | isn't equal to
+`:-`           | conforms to schema
+`:!-`          | doesn't conform to schema
+`:?`           | passes predicate
+`:!?`          | fails predicate
+`:#`           | matches regex
+`:!#`          | doesn't match regex
+`:>` or `:⊃`   | is superset of
+`:!>` or `:⊅`  | isn't superset of
+`:<` or `:⊂`   | is subset of
+`:!<` or `:⊄`  | isn't subset of
+`:instanceof`  | is instance of
+`:!instanceof` | isn't instance of
 
 ## Paths
 
