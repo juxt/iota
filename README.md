@@ -7,15 +7,17 @@ Infix Operators for Test Assertions
 When you are writing tests, it's common to want to check a number of properties against a given value.
 
 ```clojure
-(require '[schema.core :as s])
+(require '[clojure.test :refer :all]
+         '[schema.core :as s])
 
-(let [response ...]
-  (is (= (:status response) 200))
-  (is (= (count (get-in response [:headers "content-length"])) (count "Hello World!")))
-  (is (= (count (get-in response [:headers "content-type"])) "text/plain;charset=utf-8"))
-  (is (nil? (s/check s/Str (get-in response [:headers "content-type"]))))
-  (is (instance? java.nio.ByteBuffer response))
-  )
+(deftest my-test
+  (let [response ...]
+    (is (= (:status response) 200))
+    (is (= (count (get-in response [:headers "content-length"])) (count "Hello World!")))
+    (is (= (count (get-in response [:headers "content-type"])) "text/plain;charset=utf-8"))
+    (is (nil? (s/check s/Str (get-in response [:headers "content-type"]))))
+    (is (instance? java.nio.ByteBuffer response))
+    ))
 ```
 
 This can get a bit cumbersome.
@@ -23,15 +25,17 @@ This can get a bit cumbersome.
 iota is a little library that provides a single macro, `iota.iota/given`, that allows you to create triples, each of which expands into a `clojure.test/is` assertion.
 
 ```clojure
-(require '[schema.core :as s])
-(require '[iota.iota :refer [given]])
+(require '[clojure.test :refer :all]
+         '[schema.core :as s]
+         '[iota.iota :refer [given]])
 
-(given response
-        :status := 200
-        :headers :⊃ {"content-length" (count "Hello World!")
-                     "content-type" "text/plain;charset=utf-8"}
-        [:headers "content-type"] :- s/Str
-        :body :instanceof java.nio.ByteBuffer)
+(deftest my-test
+  (given response
+          :status := 200
+          :headers :⊃ {"content-length" (count "Hello World!")
+                       "content-type" "text/plain;charset=utf-8"}
+          [:headers "content-type"] :- s/Str
+          :body :instanceof java.nio.ByteBuffer))
 ```
 
 It's a little less typing, which might give you the extra time to add more checks, improving your testing.
