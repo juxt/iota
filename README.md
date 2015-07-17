@@ -64,7 +64,7 @@ The left hand operand of your expressions can be a vector, which acts as a path.
 Add the following dependency to your `project.clj` file
 
 ```clojure
-[juxt/iota "0.0.1"]
+[juxt/iota "0.1.0"]
 ```
 
 ## Copyright & License
