@@ -48,8 +48,8 @@ Operator       | Meaning
 `:!=`          | isn't equal to
 `:-`           | conforms to schema
 `:!-`          | doesn't conform to schema
-`:?`           | passes predicate
-`:!?`          | fails predicate
+`:?`           | satifies predicate
+`:!?`          | doesn't satisfy predicate
 `:#`           | matches regex
 `:!#`          | doesn't match regex
 `:>` or `:⊃`   | is superset of
