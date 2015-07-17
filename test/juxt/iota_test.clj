@@ -1,8 +1,8 @@
 ;; Copyright © 2015, JUXT LTD.
 
-(ns iota.iota-test
+(ns juxt.iota-test
   (:require
-   [iota.iota :refer :all]
+   [juxt.iota :refer :all]
    [clojure.test :refer :all]
    [schema.core :as s]))
 

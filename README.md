@@ -27,7 +27,7 @@ __iota__ is a micro-library that provides a single macro, `iota.iota/given`, tha
 ```clojure
 (require '[clojure.test :refer :all]
          '[schema.core :as s]
-         '[iota.iota :refer [given]])
+         '[juxt.iota :refer [given]])
 
 (deftest my-test
   (given response
