@@ -2,8 +2,9 @@
 
 (ns juxt.iota
   (:require
-   [clojure.test :refer :all]
-   [clojure.set :as set]))
+    [clojure.test :refer :all]
+    [clojure.set :as set]
+    [schema.core :as s]))
 
 ;; See the test at the end of this ns to understand the point of this code
 
