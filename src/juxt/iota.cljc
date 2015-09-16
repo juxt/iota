@@ -2,7 +2,8 @@
 
 (ns juxt.iota
   (:require
-    [clojure.test :refer :all]
+    #?(:clj  [clojure.test]
+       :cljs [cljs.test :include-macros true])
     [clojure.set :as set]
     [schema.core :as s]))
 
@@ -12,19 +13,39 @@
   (as-test-function [_] "Take the clause and return a function which is applied to the value under test"))
 
 (extend-protocol TestClause
-  clojure.lang.APersistentVector
+  #?(:clj  clojure.lang.APersistentVector
+     :cljs PersistentVector)
   ;; A function application 'path', which is simply a composed function,
   ;; left-to-right rather than right-to-left.
   (as-test-function [v] (apply comp (map as-test-function (reverse v))))
 
-  clojure.lang.Keyword
+  #?(:clj  clojure.lang.Keyword
+     :cljs Keyword)
   (as-test-function [k] k)
 
-  clojure.lang.Fn
+  #?(:clj  clojure.lang.Fn
+     :cljs function)
   (as-test-function [f] f)
 
-  String
+  #?(:clj  String
+     :cljs string)
   (as-test-function [s] #(get % s)))
+
+(defn- cljs-env?
+  "Take the &env from a macro, and tell whether we are expanding into cljs."
+  [env]
+  (boolean (:ns env)))
+
+(defmacro if-cljs
+  "Return then if we are generating cljs code and else for Clojure code.
+   https://groups.google.com/d/msg/clojurescript/iBY5HaQda4A/w1lAQi9_AwsJ"
+  [then else]
+  (if (cljs-env? &env) then else))
+
+(defmacro is [& args]
+  `(if-cljs
+     (cljs.test/is ~@args)
+     (clojure.test/is ~@args)))
 
 (defmacro given [v & body]
   (let [t (gensym)]

@@ -2,8 +2,9 @@
 
 (ns juxt.iota-test
   (:require
-   [juxt.iota :refer :all]
-   [clojure.test :refer :all]
+   [juxt.iota #?(:clj :refer :cljs :refer-macros) [given]]
+   #?(:clj  [clojure.test :refer [deftest]]
+      :cljs [cljs.test :refer-macros [deftest]])
    [schema.core :as s]))
 
 (deftest myself
