@@ -1,6 +1,6 @@
 ;; Copyright © 2015, JUXT LTD.
 
-(defproject juxt/iota "0.2.0"
+(defproject juxt/iota "0.2.1"
   :description "Infix operators for test assertions"
   :url "http://github.com/juxt/iota"
   :license {:name "The MIT License"
