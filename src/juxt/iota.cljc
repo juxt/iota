@@ -80,4 +80,9 @@
                ;; Is an instance of
                :instanceof `(is (instance? ~c ((as-test-function ~a) ~t)))
                :!instanceof `(is (not (instance? ~c ((as-test-function ~a) ~t))))
+
+               ;; Every satisfies predicate
+               :∀ `(is (every? ~c ((as-test-function ~a) ~t)))
+               :!∀ `(is (not (every? ~c ((as-test-function ~a) ~t))))
+
                ))))))
