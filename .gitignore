@@ -11,3 +11,4 @@ pom.xml.asc
 .hg/
 resources/public/js/testable.js
 *-init.clj
+/node_modules/
