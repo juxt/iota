@@ -29,7 +29,11 @@
 
   #?(:clj  String
      :cljs string)
-  (as-test-function [s] #(get % s)))
+  (as-test-function [s] #(get % s))
+
+  #?(:clj  Long
+     :cljs long)
+  (as-test-function [n] #(get (vec %) n)))
 
 (defn- cljs-env?
   "Take the &env from a macro, and tell whether we are expanding into cljs."
