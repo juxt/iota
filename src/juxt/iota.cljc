@@ -51,7 +51,9 @@
      (cljs.test/is ~@args)
      (clojure.test/is ~@args)))
 
-(defmacro given [v & body]
+(defmacro given "Given v, assert the following…"
+  {:style/indent 1}
+  [v & body]
   (let [t (gensym)]
     `(do
        (let [~t ~v]
