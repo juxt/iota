@@ -46,14 +46,15 @@
         (i/⊃ #{:a :b})))
 
   (given "abc"
-    (i/re-matches "abc")
-    (in first
-        (= \a)))
+    (re-matches #"abc")
+    (in first (= \a)))
 
   (given {:s "abc"}
     (in :s
-        (i/re-matches "abc")
-        (i/instance? String)
-        (i/not-instance? Long))))
+        (re-matches #"abc")
+        (instance? String)
+        ;;(not (instance? String))
+        )))
+
 
 

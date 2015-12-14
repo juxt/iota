@@ -141,6 +141,11 @@
 ;; An empty macro, this functions as both a declare and var.
 (defmacro ^{:style/indent 1} in [& args])
 
+(defmacro expand-assertion [p args]
+  (if (contains? #{'re-matches 'instance?} (first args))
+    `(~(first args) ~@(rest args) ~p)
+    `(~(first args) ~p ~@(rest args))))
+
 (defmacro given-prefix
   "Check assertions against value p"
   {:style/indent 1}
@@ -149,11 +154,16 @@
     `(let [~p' ~p]
        ~@(for [a assertions]
            (cond
+             (and (list? a) (= (first a) 'not))
+             `(is (not ~(second a)))
+             
              (and (list? a) (= (first a) 'in))
              `(given ((as-test-function ~(second a)) ~p') ~@(drop 2 a))
 
-             (and (list? a) (= (count a) 2))
-             `(is (~(first a) ~p' ~(second a)))
+             (and (list? a) (= (first a) 'not))
+             `(is (not (expand-assertion p' (second a))))
+
+             (list? a) `(is (expand-assertion ~p' ~a))
 
              :otherwise `(throw (ex-info "Too many arguments" {})))))))
 
@@ -171,3 +181,5 @@
   (if (some keyword? (rest args))
     `(given-infix ~@args)
     `(given-prefix ~@args)))
+
+
