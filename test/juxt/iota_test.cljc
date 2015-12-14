@@ -35,22 +35,25 @@
 
 (deftest given-prefix-test
   (given {:foo "foo" :bar "bar"}
-    (= {:foo "foo" :bar "bar"})
-    (= :foo "foo")
-    (= :bar "bar")
-    (not= :foo "bar"))
+         (= {:foo "foo" :bar "bar"})
+         (in :foo (= "foo"))
+         (in :bar (= "bar"))
+         (in :foo (not= "bar")))
 
   (given {:s #{:a :b :c}}
-    (i/⊂ :s #{:a :b :c :d})
-    (i/⊃ :s #{:a :b}))
+    (in :s
+        (i/⊂ #{:a :b :c :d})
+        (i/⊃ #{:a :b})))
 
   (given "abc"
     (i/re-matches "abc")
-    (= first \a))
+    (in first
+        (= \a)))
 
   (given {:s "abc"}
-    (i/re-matches :s "abc")
-    (i/instance? :s String)
-    (i/not-instance? :s Long)))
+    (in :s
+        (i/re-matches "abc")
+        (i/instance? String)
+        (i/not-instance? Long))))
 
 

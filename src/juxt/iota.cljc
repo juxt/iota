@@ -138,6 +138,9 @@
 (defmacro superset? [a b] `(⊃ ~a ~b))
 (defmacro not-superset? [a b] `(⊅ ~a ~b))
 
+;; An empty macro, this functions as both a declare and var.
+(defmacro ^{:style/indent 1} in [& args])
+
 (defmacro given-prefix
   "Check assertions against value p"
   {:style/indent 1}
@@ -145,14 +148,18 @@
   (let [p' (gensym)]
     `(let [~p' ~p]
        ~@(for [a assertions]
-           (if (and (list? a) (> (count a) 1))
-             (cond
-               (= (count a) 2) `(is (~(first a) ~p' ~(second a)))
-               (= (count a) 3) `(is (~(first a) ((as-test-function ~(second a)) ~p') ~(last a)))
-               :otherwise `(throw (ex-info "Too many arguments" {})))
-             (case (if (list? a) (first a) a)
-               println `(println ~p')
-               ))))))
+           (cond
+             (and (list? a) (= (first a) 'in))
+             `(given ((as-test-function ~(second a)) ~p') ~@(drop 2 a))
+
+             (and (list? a) (= (count a) 2))
+             `(is (~(first a) ~p' ~(second a)))
+
+             :otherwise `(throw (ex-info "Too many arguments" {})))))))
+
+#_(case (if (list? a) (first a) a)
+    println `(println ~p')
+    )
 
 (defmacro given
   "Given wrapper that allows both infix and prefix forms. If there's a
