@@ -130,6 +130,14 @@
 (defmacro not-instance? [actual class]
   `(is (not (clojure.core/instance? ~class ~actual))))
 
+;; Some folks don't care for Unicode characters, so we provide
+;; aliases. I think you can object to having to write such characters
+;; but I don't think you can reasonably complain about reading them.
+(defmacro subset? [a b] `(⊂ ~a ~b))
+(defmacro not-subset? [a b] `(⊄ ~a ~b))
+(defmacro superset? [a b] `(⊃ ~a ~b))
+(defmacro not-superset? [a b] `(⊅ ~a ~b))
+
 (defmacro given-prefix
   "Check assertions against value p"
   {:style/indent 1}
@@ -145,14 +153,6 @@
              (case (if (list? a) (first a) a)
                println `(println ~p')
                ))))))
-
-;; Some folks don't care for Unicode characters, so we provide
-;; aliases. I think you can object to having to write such characters
-;; but I don't think you can reasonably complain about reading them.
-(def subset? #'⊂)
-(def not-subset? #'⊄)
-(def superset? #'⊃)
-(def not-superset? #'⊅)
 
 (defmacro given
   "Given wrapper that allows both infix and prefix forms. If there's a
