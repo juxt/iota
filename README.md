@@ -42,22 +42,22 @@ It's a little less typing, which might give you the extra time to add more check
 
 ## Valid operators
 
-Operator       | Meaning
----------------|-------------------
-`:=`           | is equal to
-`:!=`          | isn't equal to
-`:-`           | conforms to schema
-`:!-`          | doesn't conform to schema
-`:?`           | satifies predicate
-`:!?`          | doesn't satisfy predicate
-`:#`           | matches regex
-`:!#`          | doesn't match regex
-`:>` or `:⊃`   | is superset of
-`:!>` or `:⊅`  | isn't superset of
-`:<` or `:⊂`   | is subset of
-`:!<` or `:⊄`  | isn't subset of
-`:instanceof`  | is instance of
-`:!instanceof` | isn't instance of
+Operator                          | Meaning
+----------------------------------|-------------------
+`:=` or `:equals`                 | is equal to
+`:!=` or `:not-equals`            | isn't equal to
+`:-` or `:conforms`               | conforms to schema
+`:!-` or `:not-conforms`          | doesn't conform to schema
+`:?` or `:satisfies`              | satifies predicate
+`:!?` or `:not-satisfies`         | doesn't satisfy predicate
+`:#` or `:matches`                | matches regex
+`:!#` or `:not-matches`           | doesn't match regex
+`:>` or `:⊃` or `:superset`       | is superset of
+`:!>` or `:⊅` or `:not-superset`  | isn't superset of
+`:<` or `:⊂` or `:subset`         | is subset of
+`:!<` or `:⊄` or `:not-subset`    | isn't subset of
+`:instanceof` or `:instance`      | is instance of
+`:!instanceof` or `:not-instance` | isn't instance of
 
 ## Paths
 

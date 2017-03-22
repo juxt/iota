@@ -60,35 +60,35 @@
          ~@(for [[a b c] (partition 3 body)]
              (case b
                ;; Equals?
-               := `(is (= ((as-test-function ~a) ~t) ~c))
-               :!= `(is (not= ((as-test-function ~a) ~t) ~c))
+               (:= :equals) `(is (= ((as-test-function ~a) ~t) ~c))
+               (:!= :not-equals) `(is (not= ((as-test-function ~a) ~t) ~c))
 
                ;; Schema checks
-               :- `(is (nil? (s/check ~c ((as-test-function ~a) ~t))))
-               :!- `(is (not (nil? (s/check ~c ((as-test-function ~a) ~t)))))
+               (:- :conforms) `(is (nil? (s/check ~c ((as-test-function ~a) ~t))))
+               (:!- :not-conforms) `(is (not (nil? (s/check ~c ((as-test-function ~a) ~t)))))
 
                ;; Is?
-               :? `(is (~c ((as-test-function ~a) ~t)))
-               :!? `(is (not (~c ((as-test-function ~a) ~t))))
+               (:? :satisfies) `(is (~c ((as-test-function ~a) ~t)))
+               (:!? :not-satisfies) `(is (not (~c ((as-test-function ~a) ~t))))
 
                ;; Matches regex?
-               :# `(is (re-matches (re-pattern ~c) ((as-test-function ~a) ~t)))
-               :!# `(is (not (re-matches (re-pattern ~c) ((as-test-function ~a) ~t))))
+               (:# :matches) `(is (re-matches (re-pattern ~c) ((as-test-function ~a) ~t)))
+               (:!# :not-matches) `(is (not (re-matches (re-pattern ~c) ((as-test-function ~a) ~t))))
 
                ;; Is superset?
-               (:> :⊃) `(is (set/superset? (set ((as-test-function ~a) ~t)) (set ~c)))
-               (:!> :⊅) `(is (not (set/superset? (set ((as-test-function ~a) ~t)) (set ~c))))
+               (:> :⊃ :superset) `(is (set/superset? (set ((as-test-function ~a) ~t)) (set ~c)))
+               (:!> :⊅ :not-superset) `(is (not (set/superset? (set ((as-test-function ~a) ~t)) (set ~c))))
 
                ;; Is subset?
-               (:< :⊂) `(is (set/subset? (set ((as-test-function ~a) ~t)) (set ~c)))
-               (:!< :⊄) `(is (not (set/subset? (set ((as-test-function ~a) ~t)) (set ~c))))
+               (:< :⊂ :subset) `(is (set/subset? (set ((as-test-function ~a) ~t)) (set ~c)))
+               (:!< :⊄ :not-subset) `(is (not (set/subset? (set ((as-test-function ~a) ~t)) (set ~c))))
 
                ;; Is an instance of
-               :instanceof `(is (instance? ~c ((as-test-function ~a) ~t)))
-               :!instanceof `(is (not (instance? ~c ((as-test-function ~a) ~t))))
+               (:instanceof :instance) `(is (instance? ~c ((as-test-function ~a) ~t)))
+               (:!instanceof :not-instance) `(is (not (instance? ~c ((as-test-function ~a) ~t))))
 
                ;; Every satisfies predicate
-               :∀ `(is (every? ~c ((as-test-function ~a) ~t)))
-               :!∀ `(is (not (every? ~c ((as-test-function ~a) ~t))))
+               (:∀ :every) `(is (every? ~c ((as-test-function ~a) ~t)))
+               (:!∀ :not-every) `(is (not (every? ~c ((as-test-function ~a) ~t))))
 
                ))))))
