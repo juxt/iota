@@ -59,9 +59,27 @@ Operator                          | Meaning
 `:instanceof` or `:instance`      | is instance of
 `:!instanceof` or `:not-instance` | isn't instance of
 
+## Valid test clauses
+
+In each of these cases `v` represents the given value.
+
+Test clause    | Meaning
+---------------|------------------
+Keyword        | Use the keyword as a function: `(:kw v)`
+String         | Call `get` on the value with the string: `(get v "x")`
+Long           | Cast the value to a vector, then look up the index with `get`: `(get (vec v) 5)`
+Function       | Call the function on the value: `(count v)`
+
 ## Paths
 
-The left hand operand of your expressions can be a vector, which acts as a path. A bit like `->` but you can also use strings.
+The left hand operand of your expressions can be a vector, which acts as a path. A bit like `->` but you can also use strings and numbers as well as keywords and functions. A (contrived) example:
+
+```clojure
+(deftest contrived-test
+  (given {:a {"b" '({} {} {:x 1})}}
+    [:a "b" 2] := {:x 1}
+    [:a "b" count] := 3))
+```
 
 ## Installation
 
